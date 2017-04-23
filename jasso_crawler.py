@@ -83,7 +83,6 @@ class Crawler:
                 # 過去5年間延滞比率推移
                 first_table.ix[14, 0], first_table.ix[14,1], first_table.ix[14,2], first_table.ix[14,3]
                 ]
-        print(first_table.ix[0,1])
         return pd.Series(data, index=df_header)
 
     def select_items(self, level, num):
@@ -92,7 +91,7 @@ class Crawler:
                 if i > 0:  # 「未選択」を回避
                     select_dropdown_menu = Select(self.driver.find_element_by_id(dropdown_menu_ids[level]))
                     select_dropdown_menu.select_by_index(i)
-                    # time.sleep(1)
+                    time.sleep(1) # 負荷軽減
                     if level == 3:
                         driver.find_element_by_id("search-btn").click()  # 「情報抽出」をクリック
                         soup = BeautifulSoup(driver.page_source, "lxml")
